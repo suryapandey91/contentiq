@@ -5,7 +5,7 @@ import { GEMINI_JSON_SCHEMA_BY_FORMAT } from "../geminiSchemas";
 import { SYSTEM_PROMPT, buildUserPrompt } from "../prompt";
 import type { GeneratedContent } from "../types";
 
-const DEFAULT_MODEL = "gemini-2.5-flash";
+const DEFAULT_MODEL = "gemini-3.6-flash";
 
 export async function generateWithGemini(
   topic: Topic,

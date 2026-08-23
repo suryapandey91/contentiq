@@ -3,6 +3,7 @@ import type { Topic, Format } from "../topics";
 import { SCHEMA_BY_FORMAT } from "../schema";
 import { GEMINI_JSON_SCHEMA_BY_FORMAT } from "../geminiSchemas";
 import { SYSTEM_PROMPT, buildUserPrompt } from "../prompt";
+import { maxOutputTokensFor } from "../tokenBudget";
 import type { GeneratedContent } from "../types";
 
 const DEFAULT_MODEL = "gemini-3.6-flash";
@@ -30,6 +31,7 @@ export async function generateWithGemini(
       responseMimeType: "application/json",
       responseJsonSchema: GEMINI_JSON_SCHEMA_BY_FORMAT[format],
       temperature: 0.9,
+      maxOutputTokens: maxOutputTokensFor(format),
     },
   });
 

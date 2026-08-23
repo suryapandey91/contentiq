@@ -33,12 +33,34 @@ export async function exportDeckToPptx(topicLabel: string, deck: DeckContent): P
   });
   s1.addShape(pptx.ShapeType.rect, { x: 0.6, y: 3.25, w: 1.4, h: 0.02, fill: { color: ACCENT } });
 
-  // Slide 2 — chart
+  // Slides 2-4 — content, one per argument beat
+  deck.slides.forEach((slide, i) => {
+    const s = pptx.addSlide();
+    s.background = { color: BG };
+    s.addText(`${topicLabel.toUpperCase()}  ·  ${String(i + 2).padStart(2, "0")} / 06`, {
+      x: 0.6, y: 0.45, w: 8.8, h: 0.4,
+      fontFace: "Georgia", fontSize: 11, color: ACCENT, charSpacing: 2,
+    });
+    s.addText(slide.heading, {
+      x: 0.6, y: 0.95, w: 8.8, h: 0.8,
+      fontFace: "Georgia", fontSize: 26, color: TEXT,
+    });
+    s.addText(
+      slide.bullets.map((b) => ({ text: b, options: { bullet: { characterCode: "2014", indent: 18 }, breakLine: true } })),
+      { x: 0.7, y: 2.0, w: 8.4, h: 3.0, fontFace: "Georgia", fontSize: 16, color: TEXT, lineSpacing: 30, valign: "top" },
+    );
+  });
+
+  // Slide 5 — chart
   const s2 = pptx.addSlide();
   s2.background = { color: BG };
-  s2.addText(topicLabel.toUpperCase(), {
-    x: 0.6, y: 0.4, w: 8.8, h: 0.4,
-    fontFace: "Georgia", fontSize: 12, color: ACCENT, charSpacing: 2,
+  s2.addText(`${topicLabel.toUpperCase()}  ·  05 / 06`, {
+    x: 0.6, y: 0.45, w: 8.8, h: 0.4,
+    fontFace: "Georgia", fontSize: 11, color: ACCENT, charSpacing: 2,
+  });
+  s2.addText(deck.chartTitle, {
+    x: 0.6, y: 0.95, w: 8.8, h: 0.7,
+    fontFace: "Georgia", fontSize: 26, color: TEXT,
   });
   s2.addChart(
     pptx.ChartType.bar,
@@ -50,7 +72,7 @@ export async function exportDeckToPptx(topicLabel: string, deck: DeckContent): P
       },
     ],
     {
-      x: 0.6, y: 1.0, w: 8.8, h: 4.0,
+      x: 0.6, y: 1.7, w: 8.8, h: 3.2,
       chartColors: [ACCENT],
       catAxisLabelColor: TEXT,
       valAxisLabelColor: TEXT,
@@ -62,8 +84,12 @@ export async function exportDeckToPptx(topicLabel: string, deck: DeckContent): P
       barGapWidthPct: 40,
     },
   );
+  s2.addText(deck.chartInsight, {
+    x: 0.6, y: 4.95, w: 8.8, h: 0.5,
+    fontFace: "Georgia", italic: true, fontSize: 14, color: "7D5411",
+  });
 
-  // Slide 3 — closing line
+  // Slide 6 — closing line
   const s3 = pptx.addSlide();
   s3.background = { color: ACCENT_LIGHT };
   s3.addText(`"${deck.closeLine}"`, {

@@ -3,6 +3,7 @@ import { zodOutputFormat } from "@anthropic-ai/sdk/helpers/zod";
 import type { Topic, Format } from "../topics";
 import { SCHEMA_BY_FORMAT } from "../schema";
 import { SYSTEM_PROMPT, buildUserPrompt } from "../prompt";
+import { maxOutputTokensFor } from "../tokenBudget";
 import type { GeneratedContent } from "../types";
 
 const DEFAULT_MODEL = "claude-opus-5";
@@ -24,7 +25,7 @@ export async function generateWithAnthropic(
 
   const response = await client.messages.parse({
     model,
-    max_tokens: 4096,
+    max_tokens: maxOutputTokensFor(format),
     system: SYSTEM_PROMPT,
     messages: [{ role: "user", content: buildUserPrompt(topic, format, angle) }],
     output_config: {

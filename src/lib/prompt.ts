@@ -6,11 +6,20 @@ const FORMAT_INSTRUCTIONS: Record<Format, string> = {
     "Write a LinkedIn POST: a hook line, a short punchy body (2-4 sentences), a 1-3 word tag, " +
     "and 4 illustrative chart data points that visually back up the argument.",
   article:
-    "Write the opening of a LinkedIn ARTICLE: a headline, a one-sentence dek, a pull quote, " +
-    "and a 3-row before/after table that supports the argument with concrete contrasts.",
+    "Write a full-length long-form ARTICLE of at least 1,000 words total, structured as: a headline; a one-sentence dek; " +
+    "a 2-paragraph intro that sets up the thesis; a pull quote; a 6-9 paragraph body that is the substantive bulk of the " +
+    "piece — develop the argument with concrete, specific examples (not generic ones), reason through the mechanics of " +
+    "why it's true, explicitly address at least one real counterargument or objection, and cover practical implications " +
+    "for the reader; a 3-row before/after table with concrete contrasts; and a 2-paragraph conclusion that synthesizes " +
+    "the argument and lands on a clear, memorable takeaway. Every paragraph must earn its place — no padding or " +
+    "repetition just to hit length; go deeper and more specific instead of restating the thesis.",
   deck:
-    "Write the outline for a 3-slide DECK: a title slide (title + subtitle), a data point set for a chart slide " +
-    "(4 illustrative values), and a punchy one-line closing statement for the final slide.",
+    "Write a substantive 6-slide DECK, not a bare outline: a title slide (title + subtitle); 3 content slides that " +
+    "carry the actual argument — e.g. the problem/context, the core insight, and the practical implications — each " +
+    "with a short heading and 3-4 specific, concrete bullet points (real claims with real detail, never generic " +
+    "filler like 'leverage synergies'); a data slide (a chart headline, 4 illustrative chart values, and a one-sentence " +
+    "insight explaining what the data shows and why it matters); and a punchy one-line closing statement for the " +
+    "final slide. A reader should walk away having learned something specific, not just seen a title and a chart.",
 };
 
 export const SYSTEM_PROMPT = `You are the writing engine behind ContentIQ, a tool that turns a professional's point of view into LinkedIn content.

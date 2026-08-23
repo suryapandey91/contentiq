@@ -87,10 +87,16 @@ export default function WorkspacePage() {
         const table = a.table
           .map((r) => `| ${r.metric} | ${r.before} | ${r.after} |`)
           .join("\n");
-        downloadText(
-          `${topic.label.toLowerCase().replace(/[^a-z0-9]+/g, "-")}-article.md`,
-          `# ${a.title}\n\n${a.dek}\n\n> ${a.quote}\n\n| | Before | After |\n| --- | --- | --- |\n${table}\n`,
-        );
+        const md = [
+          `# ${a.title}`,
+          a.dek,
+          ...a.intro,
+          `> ${a.quote}`,
+          ...a.body,
+          `| | Before | After |\n| --- | --- | --- |\n${table}`,
+          ...a.conclusion,
+        ].join("\n\n");
+        downloadText(`${topic.label.toLowerCase().replace(/[^a-z0-9]+/g, "-")}-article.md`, md + "\n");
       }
     } finally {
       setExporting(false);

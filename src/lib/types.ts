@@ -12,15 +12,26 @@ export type PostContent = {
 export type ArticleContent = {
   title: string;
   dek: string;
+  intro: string[];
   quote: string;
+  body: string[];
   table: { metric: string; before: string; after: string }[];
+  conclusion: string[];
+};
+
+export type DeckSlide = {
+  heading: string;
+  bullets: string[];
 };
 
 export type DeckContent = {
   title: string;
   sub: string;
-  closeLine: string;
+  slides: DeckSlide[];
+  chartTitle: string;
   chart: ChartPoint[];
+  chartInsight: string;
+  closeLine: string;
 };
 
 export type GeneratedContent = PostContent | ArticleContent | DeckContent;
